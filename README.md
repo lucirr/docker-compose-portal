@@ -115,3 +115,18 @@ $ docker-compose start
 ## 접속
 * portal http://localhost
 * admin http://localhost:9000
+
+## uaa 초기 세팅
+```
+$ uaac target http://localhost:8080/uaa
+$ uaac token client get admin -s adminsecret 
+$ uaac group add uaaXpert.admin
+$ uaac group add company.admin 
+$ uaac group add company.manager
+
+$ uaac user add admin@admin.com --emails admin@admin.com --given_name Admin -p password
+
+$ uaac member add uaaXpert.admin admin@admin.com
+
+$ uaac client add uaaXpert -s uaaXpertsecret --scope "scim.userids password.write company.admin uaaXpert.admin company.manager openid" --authorized_grant_types "refresh_token password client_credentials" --authorities "uaa.resource uaa.admin password.write"
+```
