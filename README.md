@@ -65,6 +65,7 @@ $ git clone ...
 ```
 $ cd comm-api
 $ git clone ...
+$ cd UaaXpert_API
 $ mvn -Dmaven.test.skip=true package
 ```
 
@@ -72,6 +73,7 @@ $ mvn -Dmaven.test.skip=true package
 ```
 $ cd paas-api
 $ git clone ...
+$ cd PaaSXpert3_API
 $ mvn -Dmaven.test.skip=true package
 ```
 
