@@ -1,0 +1,52 @@
+version: '2'
+services:
+  web:
+    build:
+      context: ./nginx
+    ports:
+    - "80:80"
+    - "9000:9000"
+    volumes:
+    - "./comm-web/UaaXpert_UI/portal-web:/usr/share/nginx/html/portal"
+    - "./comm-web/UaaXpert_UI/comm-web:/usr/share/nginx/html/comm"
+    - "./paas-web/PaaSXpert3_UI:/usr/share/nginx/html/paas"
+    links:
+    - comm-api
+    - paas-api
+  uaa:
+    image: dordoka/tomcat
+    ports:
+    - "8080:8080"
+    - "9009:8009"
+    volumes:
+    - "./uaa/webapps:/opt/tomcat/webapps/"
+    links:
+    - db
+  comm-api:
+    build:
+      context: ./comm-api
+      args:
+        JAR_FILE: UaaXpert_API/target/kpaasta-comm.api-1.0.jar
+    links:
+    - db
+    - redis
+  paas-api:
+    build:
+      context: ./paas-api
+      args:
+        JAR_FILE: PaaSXpert3_API/target/kpaasta-paas.api-1.0.jar
+    links:
+    - db
+    - redis
+  db:
+    image: mysql
+    ports:
+    - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+    volumes:
+    - "./db:/docker-entrypoint-initdb.d"
+  redis:
+    image: redis
+

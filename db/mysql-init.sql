@@ -1,0 +1,11 @@
+create database uaa CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+create database comm CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+create database paas CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+create database PaasXpertPortal CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+create user 'uaa'@'%' identified by 'changeme';
+create user 'comm'@'%' identified by 'changeme';
+create user 'paas'@'%' identified by 'changeme';
+GRANT ALL PRIVILEGES ON *.* To 'uaa'@'%';
+GRANT ALL PRIVILEGES ON *.* To 'comm'@'%';
+GRANT ALL PRIVILEGES ON *.* To 'paas'@'%';
+FLUSH PRIVILEGES;
