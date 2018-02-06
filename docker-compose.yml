@@ -30,6 +30,7 @@ services:
     links:
     - db
     - redis
+    - uaa
   paas-api:
     build:
       context: ./paas-api
